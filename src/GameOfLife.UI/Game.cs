@@ -6,20 +6,26 @@ public sealed class Game : IDisposable
     const char DEAD = '.';
     const char ALIVE = '*';
 
+    private readonly int _rows;
+    private readonly int _cols;
     private readonly int _size;
     private readonly nint _game;
 
-    public Game(int size)
+    public Game(int rows, int cols)
     {
-        _size = size;
-        _game = Library.CreateGame(_size);
+        _rows = rows;
+        _cols = cols;
+        _size = _rows * _cols;
+        _game = Library.CreateGame(_rows, _cols);
     }
 
     public Game(string seed)
     {
         var lines = seed.Split(default(char[]), options: StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-        _size = lines.Length;
-        _game = Library.CreateGame(_size);
+        _rows = lines.Length;
+        _cols = lines[0].Length;
+        _size = _rows * _cols;
+        _game = Library.CreateGame(_rows, _cols);
         Seed(lines);
     }
 
@@ -27,10 +33,7 @@ public sealed class Game : IDisposable
 
     public void Seed(string[] lines)
     {
-        if (lines.Length != lines[0].Length)
-            throw new NotSupportedException("Non square grids");
-
-        var data = new byte[_size * _size];
+        var data = new byte[_size];
         for (int y = 0; y < lines.Length; ++y)
         {
             for (int x = 0; x < lines[y].Length; ++x)
@@ -39,7 +42,7 @@ public sealed class Game : IDisposable
                 if (value is not '*' and not '.')
                     throw new ArgumentException("Invalid seed");
 
-                data[y * _size + x] = (byte)lines[y][x];
+                data[y * _cols + x] = (byte)lines[y][x];
             }
         }
 
@@ -47,7 +50,7 @@ public sealed class Game : IDisposable
         {
             fixed (byte* ptr = data)
             {
-                if (Library.Seed(_game, ptr, _size * _size) is var result && result != 0)
+                if (Library.Seed(_game, ptr, _size) is var result && result != 0)
                 {
                     Span<byte> error = new byte[result];
                     fixed (byte* ptr2 = error)
@@ -83,16 +86,16 @@ public sealed class Game : IDisposable
     internal Grid GetGrid()
     {
         var grid = new Grid()
-            .AddColumns(_size);
+            .AddColumns(_cols);
         unsafe
         {
             var state = Library.GetState(_game);
-            for (int y = 0; y < _size; ++y)
+            for (int y = 0; y < _rows; ++y)
             {
-                var row = new string[_size];
-                for (int x = 0; x < _size; ++x)
+                var row = new string[_cols];
+                for (int x = 0; x < _cols; ++x)
                 {
-                    row[x] = state[y * _size + x] == ALIVE ? $"[darkorange3]{ALIVE}[/]" : $"[silver]{DEAD}[/]";
+                    row[x] = state[y * _cols + x] == ALIVE ? $"[darkorange3]{ALIVE}[/]" : $"[silver]{DEAD}[/]";
                 }
                 grid.AddRow(row);
             }

@@ -1,12 +1,14 @@
 #define DLLEXPORT __declspec(dllexport)
 
 import gol;
+import std;
+
 using namespace gol;
 
 extern "C" {
-    DLLEXPORT Game* CreateGame(size_t size)
+    DLLEXPORT Game* CreateGame(const std::size_t rows, const std::size_t cols)
     {
-        return new Game(size);
+        return new Game(rows, cols);
     }
 
     DLLEXPORT void DeleteGame(Game* game)
