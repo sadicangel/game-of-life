@@ -11,6 +11,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Seeds\**\*.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Spectre.Console" Version="0.48.0" />
   </ItemGroup>
 
