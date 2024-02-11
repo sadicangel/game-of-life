@@ -90,5 +90,11 @@ namespace gol
             }
         }
         std::swap(_main, _temp);
+        _generation++;
+    }
+
+    std::size_t Game::generation() const
+    {
+        return _generation;
     }
 }

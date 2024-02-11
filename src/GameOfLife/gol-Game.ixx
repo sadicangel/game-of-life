@@ -9,8 +9,11 @@ namespace gol
         std::size_t _rows;
         std::size_t _cols;
         std::size_t _size;
+        
         std::unique_ptr<char> _main;
         std::unique_ptr<char> _temp;
+        
+        std::size_t _generation;
         std::string _error;
 
         const char get_next_state(size_t i) const;
@@ -25,5 +28,7 @@ namespace gol
         const char* state() const;
 
         void tick();
+
+        std::size_t generation() const;
     };
 }
