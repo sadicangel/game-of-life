@@ -26,9 +26,8 @@ using var game = new Game(File.ReadAllText(seed));
 var layout = new Layout("Root");
 try
 {
-    AnsiConsole.Write(layout.Update(Align.Center(game.GetGrid(), VerticalAlignment.Middle)));
-
     AnsiConsole.WriteLine("Press any key to start");
+    AnsiConsole.Write(layout.Update(game.GetGrid()));
     AnsiConsole.Console.Input.ReadKey(intercept: true);
 
     // Game loop.
@@ -36,7 +35,7 @@ try
     {
         AnsiConsole.Clear();
         game.Tick();
-        AnsiConsole.Write(layout.Update(Align.Center(game.GetGrid(), VerticalAlignment.Middle)));
+        AnsiConsole.Write(layout.Update(game.GetGrid()));
         await Task.Delay(500, cancellation.Token);
     }
 }
