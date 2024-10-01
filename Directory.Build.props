@@ -8,6 +8,7 @@
     <AssemblyName>GameOfLife.$(MSBuildProjectName.Replace(" ", "_"))</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
+    <Using Include="GameOfLife"/>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
       <_Parameter1>GameOfLife.$(MSBuildProjectName.Replace(" ", "_")).Tests</_Parameter1>
     </AssemblyAttribute>

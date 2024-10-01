@@ -1,0 +1,66 @@
+
+#----------------------------- Global Properties ----------------------------#
+
+/outputDir:bin/$(Platform)
+/intermediateDir:obj/$(Platform)
+/platform:DesktopGL
+/config:
+/profile:Reach
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+
+#---------------------------------- Content ---------------------------------#
+
+#begin ../../../assets/images/cell_bg.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../assets/images/cell_bg.png;images/cell_bg.png
+
+#begin ../../../assets/images/cell_bg.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../assets/images/cell_bg.png;images/cell_bg.png
+
+#begin ../../../assets/images/cell.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../assets/images/cell.png;images/cell.png
+
+#begin ../../../assets/seeds/$rats.txt
+/copy:../../../assets/seeds/$rats.txt;seeds/$rats.txt
+
+#begin ../../../assets/seeds/119P4H1V0.txt
+/copy:../../../assets/seeds/119P4H1V0.txt;seeds/119P4H1V0.txt
+
+#begin ../../../assets/seeds/46P4H1V0.txt
+/copy:../../../assets/seeds/46P4H1V0.txt;seeds/46P4H1V0.txt
+
+#begin ../../../assets/seeds/68p9.txt
+/copy:../../../assets/seeds/68p9.txt;seeds/68p9.txt
+
+#begin ../../../assets/seeds/glider.txt
+/copy:../../../assets/seeds/glider.txt;seeds/glider.txt
+
