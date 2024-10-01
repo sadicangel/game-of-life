@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Text;
 
-namespace Gol;
+namespace GameOfLife;
 
 public sealed class World
 {

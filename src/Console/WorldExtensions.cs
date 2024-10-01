@@ -1,6 +1,6 @@
 ﻿using Spectre.Console;
 
-namespace Gol;
+namespace GameOfLife;
 internal static class WorldExtensions
 {
     public static Markup ToMarkup(this State state) =>

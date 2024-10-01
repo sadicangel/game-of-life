@@ -1,4 +1,4 @@
-﻿namespace Gol;
+﻿namespace GameOfLife;
 
 public enum State : byte
 {
