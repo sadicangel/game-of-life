@@ -13,18 +13,21 @@ Console.CancelKeyPress += (s, e) =>
     e.Cancel = true;
 };
 
+AnsiConsole.Console.Cursor.Show();
 AnsiConsole.MarkupLine("[green]Conway's Game of Life[/]");
 
-var file = AnsiConsole.Prompt(
+var seed = AnsiConsole.Prompt(
     new SelectionPrompt<string>()
         .Title("Select a [i]seed[/]")
         .PageSize(10)
         .MoreChoicesText("\"[grey](Move up and down to reveal more seeds)[/]")
         .AddChoices(Directory.EnumerateFiles("assets/seeds"))
         .UseConverter(Path.GetFileNameWithoutExtension));
-var seed = File.ReadAllText(file);
-AnsiConsole.WriteLine(file);
-AnsiConsole.WriteLine(seed);
+
+var world = new World(File.ReadAllText(seed));
+
+AnsiConsole.MarkupLine($"[i]{Path.GetFileNameWithoutExtension(seed)}[/]");
+AnsiConsole.Write(world.ToGrid());
 AnsiConsole.WriteLine();
 
 var speed = AnsiConsole.Prompt(
@@ -35,17 +38,16 @@ AnsiConsole.WriteLine();
 
 AnsiConsole.WriteLine("Press any key to start..");
 AnsiConsole.Console.Input.ReadKey(intercept: true);
+AnsiConsole.Console.Cursor.Hide();
 AnsiConsole.Clear();
 
-var world = new World(seed);
-var layout = new Layout("Root");
 try
 {
     // Game loop.
     while (!cancellation.IsCancellationRequested)
     {
         AnsiConsole.Cursor.SetPosition(0, 0);
-        AnsiConsole.Write(layout.Update(world.ToGrid()));
+        AnsiConsole.Write(world.ToGrid());
         world.Evolve();
         await Task.Delay(speed, cancellation.Token);
     }

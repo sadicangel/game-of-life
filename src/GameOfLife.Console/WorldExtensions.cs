@@ -4,7 +4,7 @@ namespace Gol;
 internal static class WorldExtensions
 {
     public static Markup ToMarkup(this State state) =>
-        new(state is State.Alive ? "[darkorange3]▣[/]" : "[silver]▢[/]");
+        new(state is State.Alive ? "[olive]▣[/]" : "[grey]□[/]");
 
     public static TResult[] Map<TSource, TResult>(this ReadOnlySpan<TSource> span, Func<TSource, TResult> map)
     {
