@@ -1,4 +1,5 @@
 ﻿using GameOfLife.Scenes;
+using GameOfLife.Services;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -6,31 +7,15 @@ using Microsoft.Xna.Framework.Input;
 namespace GameOfLife;
 public class GameRoot : Game
 {
-    private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch = null!;
-    private readonly GameScene _scene;
+    private readonly SceneManager _sceneManager = new();
+    private readonly KeyboardManager _keyboardManager = new();
 
     public GameRoot()
     {
-        _graphics = new GraphicsDeviceManager(this);
+        _ = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
-
-        // TODO: Create a main menu scene, that allows loading different seeds.
-        // TODO: Add a scene to allow creating seeds.
-
-        _scene = new GameScene(
-            new World("""
-                .*..............
-                ..*.............
-                ***.............
-                ................
-                ................
-                ................
-                ................
-                ................
-                """),
-            TimeSpan.FromMilliseconds(200));
     }
 
     protected override void Initialize()
@@ -38,7 +23,12 @@ public class GameRoot : Game
         Window.Title = "Conway's Game of Life";
         Window.AllowUserResizing = true;
 
-        _scene.Initialize(GraphicsDevice);
+        // Load services
+        Services.AddService(Content);
+        Services.AddService(_sceneManager);
+        Services.AddService(_keyboardManager);
+
+        _sceneManager.PushScene(new MainScene(Services));
 
         base.Initialize();
     }
@@ -46,15 +36,14 @@ public class GameRoot : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-        _scene.Load(Content);
     }
 
     protected override void Update(GameTime gameTime)
     {
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+        if (_keyboardManager.IsKeyPressed(Keys.Escape) && _sceneManager.Count is 0)
             Exit();
 
-        _scene.Update(gameTime);
+        _sceneManager.Scene.Update(gameTime);
 
         base.Update(gameTime);
     }
@@ -64,7 +53,7 @@ public class GameRoot : Game
         GraphicsDevice.Clear(new Color(54, 69, 79));
 
         _spriteBatch.Begin();
-        _scene.Draw(gameTime, _spriteBatch);
+        _sceneManager.Scene.Draw(_spriteBatch);
         _spriteBatch.End();
 
         base.Draw(gameTime);

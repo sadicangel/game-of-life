@@ -13,17 +13,15 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin ../../../assets/images/cell_bg.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
+#begin ../../../assets/fonts/Arcade.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../assets/images/cell_bg.png;images/cell_bg.png
+/processorParam:TextureFormat=Compressed
+/build:../../../assets/fonts/Arcade.spritefont;fonts/Arcade.spritefont
+
+#begin ../../../assets/fonts/Arcade.ttf
+/copy:../../../assets/fonts/Arcade.ttf;fonts/Arcade.ttf
 
 #begin ../../../assets/images/cell_bg.png
 /importer:TextureImporter
