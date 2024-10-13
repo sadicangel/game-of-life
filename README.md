@@ -16,4 +16,8 @@ Rules:
 
 The game logic is implemented in [World class](/src/Domain/World.cs).
 
-There are two frontends for this: a simple [console app](/src/Console/) and an actual ["game"](/src/Conway/), using [Monogame](https://monogame.net/).
+### [console app](/src/Console/)
+![cli](game_of_line_cli.png)
+
+### [_game_ app](/src/Conway/), using [Monogame](https://monogame.net/)
+![cli](game_of_line_app.png)
