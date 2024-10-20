@@ -16,8 +16,14 @@ Rules:
 
 The game logic is implemented in [World class](/src/Domain/World.cs).
 
-### [console app](/src/Console/)
-![cli](game_of_line_cli.png)
+The game can be run on the command line or using a native application.
 
-### [_game_ app](/src/Conway/), using [Monogame](https://monogame.net/)
+### [console](/src/Console/)
+![cli](game_of_line_cli.png)
+References:
+- [Spectre.Console](https://spectreconsole.net/)
+
+### [game](/src/Conway/)
 ![cli](game_of_line_app.png)
+References:
+- [Monogame](https://monogame.net/)
